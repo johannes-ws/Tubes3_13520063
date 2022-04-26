@@ -46,7 +46,7 @@ func checkSearchInput(input string) (string, string) {
 func main() {
 	var filename string
 
-	fmt.Println("Masukkan nama file: ")
+	fmt.Print("Masukkan nama file: ")
 	fmt.Scanln(&filename)
 	checkSequence(filename)
 	str4 := "2022-11-11 Sakit Gigi"
