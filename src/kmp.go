@@ -3,7 +3,7 @@ package kmp
 /* mengembalikan border function */
 func borderFunction(pattern string) []int {
 
-	var fail []int
+	var fail [1000000]int
 	fail[0] = 0
 	var m int = len(pattern)
 	var i int = 1 // iterator suffiks
@@ -21,7 +21,7 @@ func borderFunction(pattern string) []int {
 			i++
 		}
 	}
-	return fail
+	return fail[0:len(pattern)]
 }
 
 /*	menerima text dan pattern,
