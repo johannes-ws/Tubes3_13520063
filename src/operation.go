@@ -7,7 +7,8 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	//_ "github.com/Go-SQL-Driver/MySQL"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type hasil struct {
@@ -18,8 +19,17 @@ type hasil struct {
 	status        string
 }
 
+const ( // isi sesuai punya kalian
+	db_user     = "root"
+	db_password = "Johannes_235711"
+	db_host     = "localhost"
+	db_port     = 1234
+	db_database = "dna"
+)
+
 func InsertPenyakit(nama, sequence string) {
-	db, err := sql.Open("mysql", "root:password1@tcp(127.0.0.1:3306)/dna")
+	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
+	db, err := sql.Open("mysql", s)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -36,7 +46,8 @@ func InsertPenyakit(nama, sequence string) {
 }
 
 func checkSearchInput(input string) {
-	db, err := sql.Open("mysql", "root:password1@tcp(127.0.0.1:3306)/dna")
+	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
+	db, err := sql.Open("mysql", s)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -169,6 +180,25 @@ func checkSequence(filename string) bool {
 
 	re := regexp.MustCompile("^[ACTG]+$")
 	return re.Match(content)
+}
+
+func InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil string) {
+	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
+	fmt.Println(s)
+	db, err := sql.Open("mysql", s)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	defer db.Close()
+
+	insert, err := db.Query("INSERT INTO test VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	defer insert.Close()
 }
 
 // func main() {

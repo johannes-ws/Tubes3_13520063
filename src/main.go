@@ -43,7 +43,8 @@ func main() {
 				hasil += "True"
 			}
 		}
-		fmt.Printf("Hasil tes: %s - %s - %s - %s", today, nama_pengguna, nama_penyakit, hasil)
+		fmt.Printf("Hasil tes: %s - %s - %s - %s\n", today, nama_pengguna, nama_penyakit, hasil)
+		InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil)
 	} else {
 		fmt.Println("Masukan sequence DNA pengguna tidak valid")
 	}
