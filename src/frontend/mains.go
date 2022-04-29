@@ -52,16 +52,19 @@ func reader(conn *websocket.Conn) {
 
 		if a[0] == "Hasil" {
 			var hasiltest []string = checkSearchInput(a[1])
-
+			var bytearray []byte
+			for i := 0; i < len(hasiltest); i++ {
+				var s = hasiltest[i]
+				for j := 0; i < len(s); j++ {
+					bytearray = append(bytearray, s[j])
+				}
+			}
+			err = conn.WriteMessage(messageType, bytearray)
+			if err != nil {
+				log.Println(err)
+				return
+			}
 		}
-
-		fmt.Println(string(p))
-
-		if err := conn.WriteMessage(messageType, p); err != nil {
-			log.Println(err)
-			return
-		}
-
 	}
 }
 

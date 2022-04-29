@@ -9,7 +9,7 @@ export default function HasilTes() {
 
   function handleSearch() {
     sendMsg("Hasil" + ";" + query.current.value)
-    setHasil(['1','2'])
+    setHasil([...hasil, message])
   }
   return (
     <div>
