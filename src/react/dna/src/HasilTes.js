@@ -1,11 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import ListQuery from './ListQuery'
 
 export default function HasilTes() {
+  const [hasil, setHasil] = useState([])
   const query = useRef()
-  
-  function handleSearch() {
 
+  function handleSearch() {
+    setHasil(['1','2'])
   }
   return (
     <div>
@@ -14,7 +15,7 @@ export default function HasilTes() {
         <input ref={query} type="text"></input>
         <button onClick={handleSearch}> Search </button>
       </div>
-      <ListQuery query={query.current}/>
+      <ListQuery hasil={hasil}/>
     </div>
   )
 }

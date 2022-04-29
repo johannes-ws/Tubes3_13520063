@@ -1,9 +1,10 @@
 import React from 'react'
+import Query from './Query'
 
-export default function ListQuery( {query} ) {
+export default function ListQuery( {hasil} ) {
   return (
-    <div>
-      query
-    </div>
+    hasil.map(element => {
+      return <Query key={element} element={element}/>
+    })
   )
 }
