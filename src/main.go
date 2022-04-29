@@ -26,7 +26,7 @@ func main() {
 	var hasil string
 
 	currentTime := time.Now()
-	today := currentTime.Format("02 January 2006")
+	today := currentTime.Format("2006-01-02")
 
 	fmt.Print("Masukkan nama pengguna: ")
 	fmt.Scanln(&nama_pengguna)
