@@ -192,8 +192,8 @@ func InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil string) {
 	}
 
 	defer db.Close()
-
-	insert, err := db.Query("INSERT INTO test VALUES ('1', '%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+	query := fmt.Sprintf("INSERT INTO test (tanggal, nama_pasien, nama_penyakit, status) VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+	insert, err := db.Query(query)
 
 	if err != nil {
 		panic(err.Error())
