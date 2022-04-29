@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import ListQuery from './ListQuery'
 import './GeneralStyle.css'
-import { sendMsg, receiveMsg } from "./Api";
+import { sendMsg, message } from "./Api";
 
 export default function HasilTes() {
   const [hasil, setHasil] = useState([])
@@ -9,8 +9,11 @@ export default function HasilTes() {
 
   function handleSearch() {
     sendMsg("Hasil" + ";" + query.current.value)
-    var message = recieveMsg 
-    setHasil([...hasil, message])
+    console.log(message === null)
+    console.log(message)
+    if (message !== '' && message !== null) {
+      
+    }
   }
   return (
     <div>
