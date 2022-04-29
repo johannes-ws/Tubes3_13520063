@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import './GeneralStyle.css'
 
 export default function TambahPenyakit() {
   const namaPenyakit = useRef()
@@ -11,19 +12,19 @@ export default function TambahPenyakit() {
 
   return (
     <>
-      <h1>
+      <h1 className='headera'>
         Tambah Penyakit
       </h1>
       <div>
-        Nama Penyakit :
-        <input ref={namaPenyakit} type="text"></input>
+         <h3 className='headerb'> Nama Penyakit : </h3> 
+         <input className='pad' ref={namaPenyakit} type="text"></input>
       </div>
       <div>
-        Sequence DNA :
-        <input type='file' id='file' ref={inputFilePenyakit}/>
+        <h3 className='headerb'> Sequence DNA : </h3>
+        <input className='pad' type='file' id='file' ref={inputFilePenyakit}/>
       </div>
       <div>
-        <button onClick={handleSubmit}> Submit </button>
+        <button className='button' onClick={handleSubmit}> Submit </button>
       </div>
     </>
   )

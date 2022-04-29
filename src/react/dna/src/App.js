@@ -4,9 +4,9 @@ import MainMenu from './MainMenu';
 function App() {
 
   return (
-    <>
+    <div>
       <MainMenu />
-    </>
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TambahPenyakit from './TambahPenyakit';
 import TesDna from './TesDna';
 import HasilTes from './HasilTes';
+import './MainMenu.css';
 
 export default function MainMenu() {
     const [viewMode, setViewMode] = useState(0)
@@ -26,15 +27,13 @@ export default function MainMenu() {
     if (viewMode === 0) {
         return (
             <>
-                <h1> Main Menu </h1>
+                <h1 className="main-title"> Main Menu </h1>
                 <div>
-                    <button onClick={handleTambahPenyakit}> Tambah Penyakit </button>
-                </div>
-                <div>
-                    <button onClick={handleTesDna}> Tes DNA </button>
-                </div>
-                <div>
-                    <button onClick={handleHasilTes}> Hasil Tes </button>
+                    <button className='menu-button' onClick={handleTambahPenyakit}> Tambah Penyakit </button>
+                <div></div>
+                    <button className='menu-button' onClick={handleTesDna}> Tes DNA </button>
+                <div></div>
+                    <button className='menu-button' onClick={handleHasilTes}> Hasil Tes </button>
                 </div>
             </>
         )

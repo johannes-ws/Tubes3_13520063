@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import './GeneralStyle.css'
 
 export default function TesDna() {
   const namaPengguna = useRef()
@@ -12,21 +13,21 @@ export default function TesDna() {
   };
   return (
       <div>
-        <h1> Tes DNA </h1>
+        <h1 className='headera'> Tes DNA </h1>
         <div>
-          Nama Pengguna :
-          <input ref={namaPengguna} type="text"></input>
+          <h3 className='headerb'>Nama Pengguna :</h3>
+          <input className='pad' ref={namaPengguna} type="text"></input>
         </div>
         <div>
-        Sequence DNA :
-        <input type='file' id='file' ref={inputFilePasien}/>
+        <h3 className='headerb'>Sequence DNA : </h3>
+        <input className='pad' type='file' id='file' ref={inputFilePasien}/>
         </div>
         <div>
-          Prediksi Penyakit :
-          <input ref={prediksiPenyakit} type="text"></input>
+          <h3 className='headerb'>Prediksi Penyakit : </h3>
+          <input className='pad' ref={prediksiPenyakit} type="text"></input>
         </div>
         <div>
-          <button onClick={handleSubmit}> Submit </button>
+          <button className='button' onClick={handleSubmit}> Submit </button>
         </div>
       </div>
   )

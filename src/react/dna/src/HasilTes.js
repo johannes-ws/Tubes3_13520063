@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import ListQuery from './ListQuery'
+import './GeneralStyle.css'
 
 export default function HasilTes() {
   const [hasil, setHasil] = useState([])
@@ -10,9 +11,9 @@ export default function HasilTes() {
   }
   return (
     <div>
-      <h1> Hasil Tes </h1>
+      <h1 className='headera'> Hasil Tes </h1>
       <div>
-        <input ref={query} type="text"></input>
+        <input className='pad' ref={query} type="text"></input>
         <button onClick={handleSearch}> Search </button>
       </div>
       <ListQuery hasil={hasil}/>
