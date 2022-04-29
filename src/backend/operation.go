@@ -36,14 +36,23 @@ func InsertPenyakit(nama, sequence string) {
 	}
 
 	defer db.Close()
-	query := fmt.Sprintf("INSERT INTO penyakit (nama_penyakit, sequence) VALUES ( '%v', '%v');", nama, sequence)
-	insert, err := db.Query(query)
+	if checkString(sequence) {
+		query := fmt.Sprintf("INSERT INTO penyakit (nama_penyakit, sequence) VALUES ( '%v', '%v');", nama, sequence)
+		insert, err := db.Query(query)
 
-	if err != nil {
-		panic(err.Error())
+		if err != nil {
+			panic(err.Error())
+		}
+
+		defer insert.Close()
 	}
 
-	defer insert.Close()
+}
+
+func checkString(sequence string) bool {
+	new_sequence := []byte(sequence)
+	re := regexp.MustCompile("^[ACTG]+$")
+	return re.Match(new_sequence)
 }
 
 func checkSearchInput(input string) []string {
