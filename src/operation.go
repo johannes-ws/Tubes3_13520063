@@ -30,14 +30,13 @@ const ( // isi sesuai punya kalian
 func InsertPenyakit(nama, sequence string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
 	db, err := sql.Open("mysql", s)
-
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
-
-	insert, err := db.Query("INSERT INTO penyakit (nama_penyakit, sequence) VALUES ('%s','%s');", nama, sequence)
+	query := fmt.Sprintf("INSERT INTO penyakit (nama_penyakit, sequence) VALUES ( '%v', '%v');", nama, sequence)
+	insert, err := db.Query(query)
 
 	if err != nil {
 		panic(err.Error())
