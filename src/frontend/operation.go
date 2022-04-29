@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -200,9 +201,17 @@ func InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil string) {
 	if err != nil {
 		panic(err.Error())
 	}
-
+	filename := filepath.Base(nama_penyakit)
+	nama := ""
+	for _, c := range filename {
+		if string(c) == "." {
+			break
+		} else {
+			nama += string(c)
+		}
+	}
 	defer db.Close()
-	query := fmt.Sprintf("INSERT INTO test (tanggal, nama_pasien, nama_penyakit, status) VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+	query := fmt.Sprintf("INSERT INTO test (tanggal, nama_pasien, nama_penyakit, status) VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama, hasil)
 	insert, err := db.Query(query)
 
 	if err != nil {
