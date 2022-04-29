@@ -21,9 +21,9 @@ type hasil struct {
 
 const ( // isi sesuai punya kalian
 	db_user     = "root"
-	db_password = "Johannes_235711"
+	db_password = "cian99"
 	db_host     = "localhost"
-	db_port     = 1234
+	db_port     = 3306
 	db_database = "dna"
 )
 
@@ -48,13 +48,11 @@ func InsertPenyakit(nama, sequence string) {
 func checkSearchInput(input string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
 	db, err := sql.Open("mysql", s)
-
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
-
 	re1 := regexp.MustCompile(`^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])`)
 	re2 := regexp.MustCompile(`[A-Z][a-zA-Z]*(\s*[A-Z][a-zA-Z]*)*`)
 	var date []string
@@ -65,7 +63,8 @@ func checkSearchInput(input string) {
 		name = re2.FindAllString(input, -1)
 		namaReal := strings.Join(name, "")
 		tanggalReal := strings.Join(date, "")
-		rows, err := db.Query("select id, tanggal, nama_pasien, nama_penyakit, status from test where tanggal = '%s' and nama_penyakit = '%s'", tanggalReal, namaReal)
+		query := fmt.Sprintf("select id, tanggal, nama_pasien, nama_penyakit, status from test where tanggal = '%s' and nama_penyakit = '%s'", tanggalReal, namaReal)
+		rows, err := db.Query(query)
 		if err != nil {
 			fmt.Println(err.Error())
 			return
@@ -186,15 +185,15 @@ func checkSequence(filename string) bool {
 
 func InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
+	fmt.Println(s)
 	db, err := sql.Open("mysql", s)
-
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
 
-	insert, err := db.Query("INSERT INTO test (tanggal, nama_pasien, nama_penyakit, status) VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+	insert, err := db.Query("INSERT INTO test VALUES ('1', '%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
 
 	if err != nil {
 		panic(err.Error())
