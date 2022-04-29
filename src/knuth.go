@@ -1,4 +1,4 @@
-package kmp
+package main
 
 /* mengembalikan border function */
 func borderFunction(pattern string) []int {

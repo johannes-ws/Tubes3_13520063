@@ -151,8 +151,8 @@ func checkSearchInput(input string) {
 
 }
 
-func main() {
-	penyakit1 := "HIV"
-	sequence := "ACTGCTGCTGCAT"
-	InsertPenyakit(penyakit1, sequence)
-}
+// func main() {
+// 	penyakit1 := "HIV"
+// 	sequence := "ACTGCTGCTGCAT"
+// 	InsertPenyakit(penyakit1, sequence)
+// }

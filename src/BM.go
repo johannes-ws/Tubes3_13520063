@@ -1,4 +1,4 @@
-package BM
+package main
 
 import "math"
 
