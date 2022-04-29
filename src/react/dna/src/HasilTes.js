@@ -14,7 +14,7 @@ export default function HasilTes() {
         <input ref={query} type="text"></input>
         <button onClick={handleSearch}> Search </button>
       </div>
-      <ListQuery/>
+      <ListQuery query={query.current}/>
     </div>
   )
 }

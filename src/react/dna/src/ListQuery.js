@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function ListQuery() {
+export default function ListQuery( {query} ) {
   return (
-    <div>ListQuery</div>
+    <div>
+      query
+    </div>
   )
 }

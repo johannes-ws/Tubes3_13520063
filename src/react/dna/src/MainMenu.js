@@ -1,50 +1,75 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import TambahPenyakit from './TambahPenyakit';
 import TesDna from './TesDna';
 import HasilTes from './HasilTes';
 
 export default function MainMenu() {
-
+    const [viewMode, setViewMode] = useState(0)
 
     function handleTambahPenyakit() {
-        
-        return (
-            <div>
-                <TambahPenyakit />
-            </div>
-        )
+        setViewMode(1);
     }
 
     function handleTesDna() {
-        return (
-            <div>
-                <TesDna />
-            </div>
-        )
+        setViewMode(2);
     }
 
     function handleHasilTes() {
+        setViewMode(3);
+    }
+
+    function handleBack() {
+        setViewMode(0);
+    }
+
+
+    if (viewMode === 0) {
         return (
-            <div>
-                <HasilTes />
-            </div>
+            <>
+                <h1> Main Menu </h1>
+                <div>
+                    <button onClick={handleTambahPenyakit}> Tambah Penyakit </button>
+                </div>
+                <div>
+                    <button onClick={handleTesDna}> Tes DNA </button>
+                </div>
+                <div>
+                    <button onClick={handleHasilTes}> Hasil Tes </button>
+                </div>
+            </>
         )
     }
-    return (
-        <>
-            <div>
-                <button id='tombolMenu' onClick={handleTambahPenyakit}> Tambah Penyakit </button>
+
+    if (viewMode === 1) {
+        return (
+            <>
+                <div>
+                    <button onClick={handleBack}> Back </button>
+                </div>
                 <TambahPenyakit/>
-                
-            </div>
-            <div>
-                <button onClick={handleTesDna}> Tes DNA </button>
+            </>
+        )
+    }
+
+    if (viewMode === 2) {
+        return (
+            <>
+                <div>
+                    <button onClick={handleBack}> Back </button>
+                </div>
                 <TesDna/>
-            </div>
-            <div>
-                <button onClick={handleHasilTes}> Hasil Tes </button>
+            </>
+        )
+    }
+
+    if (viewMode === 3) {
+        return (
+            <>
+                <div>
+                    <button onClick={handleBack}> Back </button>
+                </div>
                 <HasilTes/>
-            </div>
-        </>
-  )
+            </>
+        )
+    }
 }
