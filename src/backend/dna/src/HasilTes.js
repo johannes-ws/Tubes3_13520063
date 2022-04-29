@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react'
 import ListQuery from './ListQuery'
 import './GeneralStyle.css'
+import { sendMsg } from "./Api";
 
 export default function HasilTes() {
   const [hasil, setHasil] = useState([])
   const query = useRef()
 
   function handleSearch() {
+    sendMsg("Hasil" + ";" + query.current.value)
     setHasil(['1','2'])
   }
   return (

@@ -45,7 +45,7 @@ func InsertPenyakit(nama, sequence string) {
 	defer insert.Close()
 }
 
-func checkSearchInput(input string) {
+func checkSearchInput(input string) []string {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
 	db, err := sql.Open("mysql", s)
 	if err != nil {
@@ -57,6 +57,7 @@ func checkSearchInput(input string) {
 	re2 := regexp.MustCompile(`[A-Z][a-zA-Z]*(\s*[A-Z][a-zA-Z]*)*`)
 	var date []string
 	var name []string
+	var hasiltest []string
 	if re1.MatchString(input) && re2.MatchString(input) {
 		fmt.Println("Pencarian berdasarkan tanggal dan nama")
 		date = re1.FindAllString(input, -1)
@@ -67,7 +68,7 @@ func checkSearchInput(input string) {
 		rows, err := db.Query(query)
 		if err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 		defer rows.Close()
 
@@ -79,7 +80,7 @@ func checkSearchInput(input string) {
 
 			if err != nil {
 				fmt.Println(err.Error())
-				return
+				return nil
 			}
 
 			result = append(result, each)
@@ -87,12 +88,14 @@ func checkSearchInput(input string) {
 
 		if err = rows.Err(); err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 
 		for _, each := range result {
 			fmt.Println(each.id, each.tanggal, each.nama_pasien, each.nama_penyakit, each.status)
+			hasiltest = append(hasiltest, string(each.id)+" "+string(each.tanggal)+" "+string(each.nama_pasien)+" "+string(each.nama_penyakit)+" "+string(each.status))
 		}
+		return hasiltest
 	} else if re1.MatchString(input) {
 		fmt.Println("Pencarian berdasarkan tanggal saja")
 		date = re1.FindAllString(input, -1)
@@ -100,7 +103,7 @@ func checkSearchInput(input string) {
 		rows, err := db.Query("select id, tanggal, nama_pasien, nama_penyakit, status from test where tanggal = ?", tanggalReal)
 		if err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 		defer rows.Close()
 
@@ -112,7 +115,7 @@ func checkSearchInput(input string) {
 
 			if err != nil {
 				fmt.Println(err.Error())
-				return
+				return nil
 			}
 
 			result = append(result, each)
@@ -120,12 +123,15 @@ func checkSearchInput(input string) {
 
 		if err = rows.Err(); err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 
 		for _, each := range result {
 			fmt.Println(each.id, each.tanggal, each.nama_pasien, each.nama_penyakit, each.status)
+			hasiltest = append(hasiltest, string(each.id)+" "+string(each.tanggal)+" "+string(each.nama_pasien)+" "+string(each.nama_penyakit)+" "+string(each.status))
+
 		}
+		return hasiltest
 	} else if re2.MatchString(input) {
 		fmt.Println("Pencarian berdasarkan nama saja")
 		name = re2.FindAllString(input, -1)
@@ -133,7 +139,7 @@ func checkSearchInput(input string) {
 		rows, err := db.Query("select id, tanggal, nama_pasien, nama_penyakit, status from test where nama_penyakit = ?", namaReal)
 		if err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 		defer rows.Close()
 
@@ -145,7 +151,7 @@ func checkSearchInput(input string) {
 
 			if err != nil {
 				fmt.Println(err.Error())
-				return
+				return nil
 			}
 
 			result = append(result, each)
@@ -153,14 +159,18 @@ func checkSearchInput(input string) {
 
 		if err = rows.Err(); err != nil {
 			fmt.Println(err.Error())
-			return
+			return nil
 		}
 
 		for _, each := range result {
 			fmt.Println(each.id, each.tanggal, each.nama_pasien, each.nama_penyakit, each.status)
+			hasiltest = append(hasiltest, string(each.id)+" "+string(each.tanggal)+" "+string(each.nama_pasien)+" "+string(each.nama_penyakit)+" "+string(each.status))
+
 		}
+		return hasiltest
 	} else {
 		fmt.Println("Format tidak sesuai (YYY-MM-DD) NamaPenyakit")
+		return nil
 	}
 
 }
