@@ -28,8 +28,9 @@ func main() {
 			fmt.Scanln(&nama)
 			fmt.Printf("masukkan file sequence: ")
 			fmt.Scanln(&filename)
-			if checkSequence(filename) {
-				sequence := readFile(filename)
+			path := "\\Tubes3_13520063\\test\\penyakit\\" + filename
+			if checkSequence(path) {
+				sequence := readFile(path)
 				InsertPenyakit(nama, sequence)
 			} else {
 				fmt.Println("Masukkan sequence salah!")
@@ -53,15 +54,17 @@ func main() {
 			fmt.Print("Masukkan metode: ")
 			fmt.Scanln(&metode)
 
-			if checkSequence(dna_pengguna) {
+			dna_path := "\\Tubes3_13520063\\test\\pengguna\\" + dna_pengguna
+			nama_path := "\\Tubes3_13520063\\test\\penyakit\\" + nama_penyakit
+			if checkSequence(dna_path) {
 				if metode == 1 {
-					if bmMatch(readFile(dna_pengguna), readFile(nama_penyakit)) == -1 {
+					if bmMatch(readFile(dna_path), readFile(nama_path)) == -1 {
 						hasil += "False"
 					} else {
 						hasil += "True"
 					}
 				} else if metode == 2 {
-					if kmpMatch(readFile(dna_pengguna), readFile(nama_penyakit)) == -1 {
+					if kmpMatch(readFile(dna_path), readFile(nama_path)) == -1 {
 						hasil += "False"
 					} else {
 						hasil += "True"
