@@ -10,7 +10,7 @@ let connect = () => {
 
   socket.onmessage = msg => {
     console.log(msg);
-    message = msg;
+    receiveMsg(msg);
   };
 
   socket.onclose = event => {
@@ -21,6 +21,10 @@ let connect = () => {
     console.log("Socket Error: ", error);
   };
 };
+
+let receiveMsg = msg => {
+  return msg
+}
 
 let sendMsg = msg => {
   console.log("sending msg: ", msg);
