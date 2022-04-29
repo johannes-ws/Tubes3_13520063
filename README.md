@@ -21,5 +21,8 @@ Program ini merupakan sebuah aplikasi berbasis website yang dapat mendeteksi apa
 2. Buka Visual Studio Code
 3. Buka folder repository ini
 4. Buka terminal baru
-5. Ketik `cd src/react/dna`
-6. Ketik `npm start`
+5. Ketik `cd src/backend`
+6. Ketik `go build`
+7. Buka terminal baru kembali
+8. Ketik `cd src/frontend/dna`
+9. Ketik `npm start`
