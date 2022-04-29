@@ -2,21 +2,8 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"regexp"
 	"time"
 )
-
-func checkSequence(filename string) bool {
-	content, err := os.ReadFile(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	re := regexp.MustCompile("^[ACTG]+$")
-	return re.Match(content)
-}
 
 func main() {
 	var nama_pengguna string
@@ -50,7 +37,7 @@ func main() {
 				hasil += "True"
 			}
 		} else if metode == 2 {
-			if kmp(readFile(dna_pengguna), readFile(nama_penyakit)) == -1 {
+			if kmpMatch(readFile(dna_pengguna), readFile(nama_penyakit)) == -1 {
 				hasil += "False"
 			} else {
 				hasil += "True"

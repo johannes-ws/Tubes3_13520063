@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
 	"regexp"
 	"strings"
 	//_ "github.com/Go-SQL-Driver/MySQL"
@@ -149,6 +151,24 @@ func checkSearchInput(input string) {
 		fmt.Println("Format tidak sesuai (YYY-MM-DD) NamaPenyakit")
 	}
 
+}
+
+func readFile(file string) string {
+	content, err := os.ReadFile(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(content)
+}
+
+func checkSequence(filename string) bool {
+	content, err := os.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	re := regexp.MustCompile("^[ACTG]+$")
+	return re.Match(content)
 }
 
 // func main() {

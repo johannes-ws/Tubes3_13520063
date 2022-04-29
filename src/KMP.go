@@ -28,7 +28,7 @@ func borderFunction(pattern string) []int {
 	mengembalikan indeks pattern pertama yang ditemukan di text,
 	mengembalikan -1 jika ditak ada pattern dalam text
 */
-func kmp(text string, pattern string) int {
+func kmpMatch(text string, pattern string) int {
 	var n int = len(text)
 	var m int = len(pattern)
 
