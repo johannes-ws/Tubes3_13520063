@@ -30,13 +30,14 @@ const ( // isi sesuai punya kalian
 func InsertPenyakit(nama, sequence string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
 	db, err := sql.Open("mysql", s)
+
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
 
-	insert, err := db.Query("INSERT INTO penyakit (nama, sequence) VALUES ( '%v', '%v');", nama, sequence)
+	insert, err := db.Query("INSERT INTO penyakit (nama_penyakit, sequence) VALUES ('%s','%s');", nama, sequence)
 
 	if err != nil {
 		panic(err.Error())
@@ -48,11 +49,13 @@ func InsertPenyakit(nama, sequence string) {
 func checkSearchInput(input string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
 	db, err := sql.Open("mysql", s)
+
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
+
 	re1 := regexp.MustCompile(`^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])`)
 	re2 := regexp.MustCompile(`[A-Z][a-zA-Z]*(\s*[A-Z][a-zA-Z]*)*`)
 	var date []string
@@ -184,15 +187,15 @@ func checkSequence(filename string) bool {
 
 func InsertHasilTes(today, nama_pengguna, nama_penyakit, hasil string) {
 	s := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db_user, db_password, db_host, db_port, db_database)
-	fmt.Println(s)
 	db, err := sql.Open("mysql", s)
+
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
 
-	insert, err := db.Query("INSERT INTO test VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
+	insert, err := db.Query("INSERT INTO test (tanggal, nama_pasien, nama_penyakit, status) VALUES ('%s','%s','%s','%s')", today, nama_pengguna, nama_penyakit, hasil)
 
 	if err != nil {
 		panic(err.Error())
