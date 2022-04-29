@@ -5,6 +5,7 @@ import (
 	"log"
 	"math"
 	"os"
+	"regexp"
 	"time"
 )
 
@@ -103,6 +104,18 @@ func bmMatch(text string, pattern string) int {
 	return -1
 }
 
+// main.go
+func checkSequence(filename string) {
+	content, err := os.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(content))
+
+	re := regexp.MustCompile("^[ACTG]+$")
+	fmt.Println(re.Match(content))
+}
+
 func readFile(file string) string {
 	content, err := os.ReadFile(file)
 	if err != nil {
@@ -126,6 +139,7 @@ func main() {
 
 	fmt.Print("Masukkan sequence DNA pengguna: ")
 	fmt.Scanln(&dna_pengguna) // C:\Users\johan\OneDrive\Documents\GitHub\Tubes3_13520063\test\pengguna\
+	checkSequence(dna_pengguna)
 
 	fmt.Print("Masukkan nama penyakit: ")
 	fmt.Scanln(&nama_penyakit) // C:\Users\johan\OneDrive\Documents\GitHub\Tubes3_13520063\test\penyakit\
